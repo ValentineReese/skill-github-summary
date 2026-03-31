@@ -71,15 +71,24 @@ def paginate_all(url, token, max_pages=20):
 # ---------------------------------------------------------------------------
 
 def search_user_commits(token, username, since, until, repos):
-    """Search commits authored by the user across repos."""
+    """Search commits authored by the user across repos.
+
+    When specific repos are provided, uses the Repo Commits API (/repos/{repo}/commits)
+    which works for both public and private repos the token has access to.
+    When no repos are specified, uses the Search API to discover commits across all repos.
+    """
     all_commits = []
-    repo_list = repos if repos else [None]
 
-    for repo in repo_list:
+    if repos:
+        # Use Repo Commits API for each specified repo (works with private repos)
+        for repo in repos:
+            commits = fetch_repo_commits(token, repo, since, until, author=username)
+            for c in commits:
+                c["repo"] = repo
+            all_commits.extend(commits)
+    else:
+        # Use Search API to discover commits across all repos
         query_parts = [f"author:{username}", f"author-date:{since}..{until}"]
-        if repo:
-            query_parts.append(f"repo:{repo}")
-
         query = "+".join(query_parts)
         url = f"{API_BASE}/search/commits?q={query}&sort=author-date&order=asc&per_page=100"
         items = paginate_all(url, token)
