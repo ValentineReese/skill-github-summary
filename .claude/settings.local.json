@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import py_compile; py_compile.compile\\(''fetch_commits.py'', doraise=True\\)\")",
+      "Bash(GITHUB_PTA=\"\" python3 fetch_commits.py --since 2026-03-01 --until 2026-03-31)",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(python3 -c \"import py_compile; py_compile.compile\\(''/Users/bobong/Codes/AI/skills/skill-github-summary/fetch_commits.py'', doraise=True\\)\")",
+      "Bash(python3:*)"
+    ]
+  }
+}
