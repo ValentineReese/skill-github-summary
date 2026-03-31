@@ -16,7 +16,7 @@ API_BASE = "https://api.github.com"
 
 def get_token():
     """Return the token or None (unauthenticated access for public repos)."""
-    return os.environ.get("GITHUB_PTA", "").strip() or None
+    return os.environ.get("GITHUB_PAT", "").strip() or None
 
 
 def api_request(url, token):
@@ -223,7 +223,7 @@ def fetch_repo_issues(token, repo, since, until, author=None):
 def cmd_user_commits(args, token):
     """Handle user-commits mode. Requires token to identify the user."""
     if not token:
-        print("Error: user-commits mode requires GITHUB_PTA to identify the authenticated user.", file=sys.stderr)
+        print("Error: user-commits mode requires GITHUB_PAT to identify the authenticated user.", file=sys.stderr)
         sys.exit(1)
 
     today = datetime.now().date()

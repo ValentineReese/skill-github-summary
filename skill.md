@@ -12,9 +12,9 @@ You are tasked with fetching and summarizing GitHub activity. There are two mode
 
 ## Setup
 
-- If `GITHUB_PTA` environment variable is set, all features are available (including private repos and user-commits mode).
-- If `GITHUB_PTA` is **not set**, only **repo-activity** mode for **public repositories** is available (unauthenticated access). Note: GitHub unauthenticated API has a lower rate limit (60 requests/hour).
-- **user-commits** mode always requires `GITHUB_PTA` because it needs to identify the authenticated user.
+- If `GITHUB_PAT` environment variable is set, all features are available (including private repos and user-commits mode).
+- If `GITHUB_PAT` is **not set**, only **repo-activity** mode for **public repositories** is available (unauthenticated access). Note: GitHub unauthenticated API has a lower rate limit (60 requests/hour).
+- **user-commits** mode always requires `GITHUB_PAT` because it needs to identify the authenticated user.
 
 ---
 

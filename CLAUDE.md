@@ -9,7 +9,7 @@ A Claude Code skill that summarizes GitHub activity.
 
 ## Requirements
 
-- Environment variable `GITHUB_PTA` must be set to a GitHub Personal Access Token with `repo` scope
+- Environment variable `GITHUB_PAT` must be set to a GitHub Personal Access Token with `repo` scope
 - Python 3.6+ (uses only stdlib: `urllib`, `json`, `argparse`)
 
 ## Two modes
