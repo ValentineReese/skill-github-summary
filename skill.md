@@ -12,9 +12,10 @@ You are tasked with fetching and summarizing GitHub activity. There are two mode
 
 ## Setup
 
-- If `GITHUB_PAT` environment variable is set, all features are available (including private repos and user-commits mode).
-- If `GITHUB_PAT` is **not set**, only **repo-activity** mode for **public repositories** is available (unauthenticated access). Note: GitHub unauthenticated API has a lower rate limit (60 requests/hour).
-- **user-commits** mode always requires `GITHUB_PAT` because it needs to identify the authenticated user.
+- Requires `gh` CLI ([GitHub CLI](https://cli.github.com/)), authenticated via `gh auth login`
+- Requires `jq` for JSON processing
+- **user-commits** mode requires authentication to identify the user
+- **repo-activity** mode works for any repo the authenticated user has access to
 
 ---
 
@@ -31,7 +32,7 @@ Summarize the authenticated user's commit history across repositories.
 ### Fetch data
 
 ```bash
-python3 /Users/bobong/Codes/AI/skills/skill-github-summary/fetch_commits.py user-commits --since <YYYY-MM-DD> --until <YYYY-MM-DD> [--repos owner/repo1 owner/repo2 ...]
+bash /Users/bobong/Codes/AI/skills/skill-github-summary/fetch_activity.sh user-commits --since <YYYY-MM-DD> --until <YYYY-MM-DD> [--repos owner/repo1 owner/repo2 ...]
 ```
 
 ### Output format
@@ -64,7 +65,7 @@ Summarize a specific public repository's activity including commits, PRs, and is
 ### Fetch data
 
 ```bash
-python3 /Users/bobong/Codes/AI/skills/skill-github-summary/fetch_commits.py repo-activity owner/repo --since <YYYY-MM-DD> --until <YYYY-MM-DD> [--author username] [--types commits pulls issues]
+bash /Users/bobong/Codes/AI/skills/skill-github-summary/fetch_activity.sh repo-activity owner/repo --since <YYYY-MM-DD> --until <YYYY-MM-DD> [--author username] [--types commits pulls issues]
 ```
 
 ### Output format
